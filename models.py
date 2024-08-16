@@ -1,8 +1,9 @@
 from pymongo import MongoClient
 import certifi
-import os
+from dotenv import dotenv_values
 
-MONGO_URI = os.environ.get('DB_URL')
+config = dotenv_values(".env")
+MONGO_URI = config["DB_URL"]
 
 ca = certifi.where()
 

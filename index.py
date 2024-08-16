@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response, jsonify, redirect, 
 import models as dbase  
 from goleador import Goleador
 
+
 db = dbase.dbConnection()
 
 app = Flask(__name__)
