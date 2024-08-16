@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     goleadores = db['goleadores']
-    goleadoresReceived = goleadores.find()
+    goleadoresReceived = goleadores.find().sort('goals', -1)
     return render_template('index.html', goleadores = goleadoresReceived)
 
 #Method Post
@@ -50,7 +50,7 @@ def edit(goleador_name):
     pg = request.form['pg']
 
     if name and goals and pg:
-        goleadores.update_one({'id2' : goleador_name}, {'$set' : {'name' : name, 'goals' : goals, 'pg' : pg}})
+        goleadores.update_one({'id2' : goleador_name}, {'$set' : {'name' : name, 'goals' : (int(goals)), 'pg' : (int(pg))}})
         response = jsonify({'message' : 'Goleador ' + goleador_name + ' actualizado correctamente'})
         return redirect(url_for('home'))
     else:
