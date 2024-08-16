@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="shortcut icon" href="static/images/escudo.ico">
+    <title>Goleadores</title>
+</head>
+<body>
+
+    <div class="titulo">
+        <h1>GOLEADORES HISTÓRICOS: CLUB ATLÉTICO BOCA JUNIORS</h1>
+    </div>
+
+    <div>
+        <div class="titulo">
+            <h2>Nuevo Goleador</h2>
+        </div>
+        
+        <div class="formulario_ing">
+            <form action="/goleadores" method="POST">
+                <label>Nombre</label>
+                <input type="text" id="name" name="name"><br />
+                <label>Goles</label>
+                <input type="text" id="goals" name="goals"><br />
+                <label>PJ</label>
+                <input type="text" id="pg" name="pg"><br />
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <div >
+        <div>
+            <div class="titulo">
+                <h2>Máximos Goleadores</h2>
+            </div>
+            
+            
+                <table class="customers">
+                    
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>PJ</th>
+                            <th>GOLES</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    
+                    {% for goleador in goleadores %}
+                        <form action="/edit/{{goleador.id2}}" method="POST">
+                            <tr>
+                                <td><input type="text" value="{{goleador.name}}" name="name" id="{{goleador.name}}"></td>
+                                <td><input type="text" value="{{goleador.pg}}" name="pg"></td>
+                                <td><input type="text" value="{{goleador.goals}}" name="goals"></td>
+                                <td><button type="submit" value="{{goleador.id2}}">Editar</button>
+                                    <a href="{{url_for('delete', goleador_name=goleador.id2)}}">Eliminar</a></td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    
+                </table>
+                
+        </div>
+            
+    </div>
+    
+</body>
+</html>
